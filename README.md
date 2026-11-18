@@ -83,7 +83,6 @@ tests/        Test files, one for each task.
 - **Independent tests.** Each test gets a fresh browser context and sets up its own state in `beforeEach`, so tests can run alone, in any order and in parallel (`fullyParallel: true`).
 - **Expected values are calculated, not copied from the page.** The sorting tests sort the product list in code and compare it with the page. The checkout test sums the item prices and calculates the tax itself.
 - **Money compared in cents.** Floating-point math can give results like `0.1 + 0.2 = 0.300000000004`, so amounts are converted to whole cents before comparing.
-- **A–Z sorting test changes the order first.** The default order on the products page is already A–Z, so the test first sorts Z–A. Otherwise it would pass even if A–Z sorting were broken.
 - **Data-driven validation tests.** The checkout validation cases are a list of inputs and expected errors, with one test generated per case. A new case is one new line.
 - **`test.step` in the E2E test.** The long checkout flow is split into seperate named steps, so the report shows exactly which step failed.
 
@@ -96,7 +95,6 @@ I used Claude (an AI assistant) to learn Playwright and TypeScript syntax, since
 - `standard_user` represents the correct, expected behavior of the site. All main tests use this user.
 - The test-users, passwords and each users expected behavior are taken from the assignment. 
 - The site is a third-party demo, so the tests assume it is available and reachable. If it is down, the tests will fail without a real bug.
-- The default product order on the products page is A–Z.
 - The tax rate is 8% of the item total, rounded to the nearest cent. The site doesn't show the rate, so I calculated it from the item total and the tax on the overview page.
 - Product names, prices and messages are compared as exact texts. If the site changes their wording, the tests will fail.
 - The site keeps the cart in the browser, so every test starts with an empty cart, because each test gets a fresh browser context.
