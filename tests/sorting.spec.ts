@@ -18,7 +18,18 @@ test.describe('Product sorting', () => {
 
      });
 
-// sorting tests by name (A-Z and Z-A)- here i test first the Z-A sorting and then the A-Z sorting (since A-Z is the default sorting option, so I need to first change it to Z-A and then back to A-Z)
+// sorting tests by name (A-Z and Z-A)
+
+test('sorting by name A to Z orders products alphabetically', async () => {
+    const names = await inventoryPage.getProductNames();
+    const expected = [...names].sort((a, b) => a.localeCompare(b));
+
+    await inventoryPage.sortBy('az');
+
+    await expect(inventoryPage.itemNames).toHaveText(expected);
+  });
+
+  
 test('sorting by name Z to A orders products in reverse alphabetical order', async () => {
     const names = await inventoryPage.getProductNames();
     const expected = [...names].sort((a, b) => b.localeCompare(a));
@@ -28,15 +39,7 @@ test('sorting by name Z to A orders products in reverse alphabetical order', asy
     await expect(inventoryPage.itemNames).toHaveText(expected);
   });
 
- test('sorting by name A to Z orders products alphabetically', async () => {
-    const names = await inventoryPage.getProductNames();
-    const expected = [...names].sort((a, b) => a.localeCompare(b));
-
-    await inventoryPage.sortBy('az');
-
-    await expect(inventoryPage.itemNames).toHaveText(expected);
-  });
-
+ 
   
 // sorting tests by price (low to high and high to low)
 
