@@ -101,11 +101,11 @@ I used Claude (an AI assistant) to learn Playwright and TypeScript syntax, since
 - The site keeps the cart in the browser, so every test starts with an empty cart, because each test gets a fresh browser context.
 
 ## What I Would Add With More Time
-- **Add more test from the bonus section such as:**
 - Tests for `problem_user` and `performance_glitch_user`.
-- API tests with Playwright's `request` fixture.
-- **Add more test cases (for valid user) that will also cover the side menu and all other pages from there.**
-- **Add well explained report (with detailed structure, %pass, %fail etc.) that can be sent also via mail to the runner's email.**
-- **Add bugs detections with "failed" reports.**
+- Add more test cases (for valid user) that will also cover the side menu and all other pages from there.
+- Add well explained report (with detailed structure, %pass, %fail etc.) that can be sent also via mail to the runner's email.
+- Add bugs detections with "failed" reports.
+- Add performance test (page-loading time, response time)
+- UI testing (visability of elements)
 
 
