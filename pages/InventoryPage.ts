@@ -11,6 +11,8 @@ export class InventoryPage {
   readonly sortDropdown: Locator;
   readonly itemNames: Locator;
   readonly itemPrices: Locator;
+  readonly cartBadge: Locator;
+  readonly cartLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,9 +20,11 @@ export class InventoryPage {
     this.sortDropdown = page.getByTestId('product-sort-container');
     this.itemNames = page.getByTestId('inventory-item-name');
     this.itemPrices = page.getByTestId('inventory-item-price');
+    this.cartBadge = page.getByTestId('shopping-cart-badge');
+    this.cartLink = page.getByTestId('shopping-cart-link');
   }
 
-//actions
+//methods 
   async sortBy(option: SortOption) {
     await this.sortDropdown.selectOption(option);
   }
@@ -35,5 +39,21 @@ export class InventoryPage {
     return this.itemPrices.allTextContents();
   }
   
+  private productCard(productName: string): Locator {
+    return this.page.getByTestId('inventory-item').filter({ hasText: productName });
+  }
+
+  async addToCart(productName: string) {
+    await this.productCard(productName).getByRole('button', { name: 'Add to cart' }).click();
+  }
+
+  async removeFromCart(productName: string) {
+    await this.productCard(productName).getByRole('button', { name: 'Remove' }).click();
+  }
+
+  async openCart() {
+    await this.cartLink.click();
+  }
+
 }
 
