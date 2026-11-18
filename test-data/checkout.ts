@@ -4,7 +4,6 @@ export const customer = {
   postalCode: '8410501',
 };
 
-
 export const TAX_RATE = 0.08;
 
 export const checkoutErrors = {
@@ -13,4 +12,4 @@ export const checkoutErrors = {
   postalCodeRequired: 'Error: Postal Code is required',
 };
 
-export const orderCompleteMessage = 'Thank you for your order!';
+export const orderCompleteMessage = 'Thank you for your order!'
