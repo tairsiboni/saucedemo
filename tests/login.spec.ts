@@ -2,6 +2,7 @@
 
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import { InventoryPage } from '../pages/InventoryPage';
 import { users, loginErrors } from '../test-data/users';
 
  test.describe('Login functionality tests', () => {
@@ -20,7 +21,8 @@ test('login with valid credentials lands on the products page.', async ({ page }
     await loginPage.login(users.standard.username, users.standard.password);
 
     await expect(page).toHaveURL(/inventory\.html/);
-    await expect(page.getByTestId('title')).toHaveText('Products');
+    await expect(new InventoryPage(page).title).toHaveText('Products');
+
   });
 
 
