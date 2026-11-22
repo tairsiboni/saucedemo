@@ -22,6 +22,10 @@ on:
           - all
           - chromium
           - firefox
+      base_url:
+        description: 'Site URL to test'
+        type: string
+        default: 'https://www.saucedemo.com'
 
 jobs:
   test:
