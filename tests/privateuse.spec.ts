@@ -15,21 +15,13 @@ import { moneyFrom, toCents } from '../utils/money';
 //test description, before each, pages
 
  test.describe('Login functionality tests', () => {
-  let loginPage: LoginPage;
+  let loginPage: LoginPage
 
   //before each test, go to the login page
  test.beforeEach(async ({ page }) => {
    const loginPage = new LoginPage(page);
     await loginPage.goto();
     await loginPage.login(users.standard.username, users.standard.password);
-
-  //put the rest of the tests here:
-test('login with valid credentials lands on the products page.', async ({ page }) => {
-    await loginPage.login(users.standard.username, users.standard.password);
-
-    await expect(page).toHaveURL(/inventory\.html/);
-    await expect(new InventoryPage(page).title).toHaveText('Products');
-
-  });
+    });
   
 });

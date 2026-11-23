@@ -44,6 +44,7 @@ jobs:
         env:
           SPEC: ${{ inputs.spec }}
           BROWSER: ${{ inputs.browser }}
+          BASE_URL: ${{ inputs.base_url }}
         run: |
           ARGS=""
           if [ -n "$SPEC" ] && [ "$SPEC" != "all" ]; then
