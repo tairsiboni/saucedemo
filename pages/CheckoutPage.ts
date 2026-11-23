@@ -1,10 +1,6 @@
 import { Page, Locator } from '@playwright/test';
+import { moneyFrom } from '../utils/money';
 
-export const moneyFrom = (text: string): number => {
-  const match = text.match(/\$(\d+\.\d{2})/);
-  if (!match) throw new Error(`No price found in "${text}"`);
-  return parseFloat(match[1]);
-};
 
 //class and locators
 

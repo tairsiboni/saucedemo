@@ -1,7 +1,8 @@
 // This is a test file for the sorting functionality in the INVENTORY page.
 
 import { test, expect } from '@playwright/test';
-import { InventoryPage, priceValue } from '../pages/InventoryPage'; 
+import { InventoryPage } from '../pages/InventoryPage';
+import { moneyFrom } from '../utils/money';
 import { LoginPage } from '../pages/LoginPage';
 import { users } from '../test-data/users';
 
@@ -45,7 +46,7 @@ test('sorting by name Z to A orders products in reverse alphabetical order', asy
 
 test('sorting by price low to high orders products from cheapest', async () => {
     const prices = await inventoryPage.getProductPrices();
-    const expected = [...prices].sort((a, b) => priceValue(a) - priceValue(b));
+    const expected = [...prices].sort((a, b) => moneyFrom(a) - moneyFrom(b));
 
     await inventoryPage.sortBy('lohi');
 
@@ -54,7 +55,7 @@ test('sorting by price low to high orders products from cheapest', async () => {
 
 test('sorting by price high to low orders products from most expensive', async () => {
     const prices = await inventoryPage.getProductPrices();
-    const expected = [...prices].sort((a, b) => priceValue(b) - priceValue(a));
+    const expected = [...prices].sort((a, b) => moneyFrom(b) - moneyFrom(a));
 
     await inventoryPage.sortBy('hilo');
 

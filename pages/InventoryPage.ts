@@ -1,7 +1,5 @@
 import { Page, Locator } from '@playwright/test';
 
-export const priceValue = (price: string): number => parseFloat(price.replace('$', ''));
-
 export type SortOption = 'az' | 'za' | 'lohi' | 'hilo';
 
 //class and locators

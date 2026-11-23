@@ -8,8 +8,8 @@ import { CheckoutPage } from '../pages/CheckoutPage';
 import { users } from '../test-data/users';
 import { products } from '../test-data/products';
 import { customer, TAX_RATE, orderCompleteMessage} from '../test-data/checkout';
+import { moneyFrom, toCents } from '../utils/money';
 
-const toCents = (amount: number) => Math.round(amount * 100);
 
 //1.naming and and pages:
 test.describe('End-to-end checkout', () => {
@@ -45,13 +45,14 @@ test.describe('End-to-end checkout', () => {
 //3. verify the item prices, tax, and total are correct
 
     await test.step('verify item total, tax and total on the overview page', async () => {
+      await checkoutPage.itemPrices.first().waitFor();
       const itemPrices = await checkoutPage.getItemPrices();
       const summary = await checkoutPage.getSummary();
 
       const expectedItemTotal = itemPrices.reduce((sum, price) => sum + toCents(price), 0);
       const expectedTax = Math.round(expectedItemTotal * TAX_RATE);
 
-      expect(itemPrices).toEqual(selected.map((p) => parseFloat(p.price.replace('$', ''))));
+      expect(itemPrices).toEqual(selected.map((p) => moneyFrom(p.price)));
       expect(toCents(summary.itemTotal)).toBe(expectedItemTotal);
       expect(toCents(summary.tax)).toBe(expectedTax);
       expect(toCents(summary.total)).toBe(expectedItemTotal + expectedTax);
