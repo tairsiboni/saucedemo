@@ -5,6 +5,9 @@ import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { users, loginErrors } from '../test-data/users';
 
+
+//test description, before each, pages
+
  test.describe('Login functionality tests', () => {
   let loginPage: LoginPage;
 

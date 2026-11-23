@@ -11,7 +11,8 @@ import { customer, TAX_RATE, orderCompleteMessage} from '../test-data/checkout';
 import { moneyFrom, toCents } from '../utils/money';
 
 
-//1.naming and and pages:
+//test description, pages, and test data- no 'beforeEach' since this is a single test that goes through the entire flow of logging in, adding products to the cart, checking out, and verifying the order completion.
+
 test.describe('End-to-end checkout', () => {
   test('valid user completes a purchase and the overview totals are calculated correctly', async ({ page }) => {
     const loginPage = new LoginPage(page);
@@ -20,8 +21,8 @@ test.describe('End-to-end checkout', () => {
     const checkoutPage = new CheckoutPage(page);
     const selected = [products.backpack, products.bikeLight, products.fleeceJacket];
 
-//2. login and add products to the cart
-    
+    //test steps- log in, add products to the cart, go to checkout and fill in customer information, verify item total, tax and total on the overview page, finish the order and see the confirmation page
+
     await test.step('log in', async () => {
       await loginPage.goto();
       await loginPage.login(users.standard.username, users.standard.password);
@@ -42,8 +43,6 @@ test.describe('End-to-end checkout', () => {
       await expect(page).toHaveURL(/checkout-step-two\.html/);
     });
 
-//3. verify the item prices, tax, and total are correct
-
     await test.step('verify item total, tax and total on the overview page', async () => {
       await checkoutPage.itemPrices.first().waitFor();
       const itemPrices = await checkoutPage.getItemPrices();
@@ -58,15 +57,12 @@ test.describe('End-to-end checkout', () => {
       expect(toCents(summary.total)).toBe(expectedItemTotal + expectedTax);
     });
 
-    //4. finish the order and see the confirmation page
-
     await test.step('finish the order and see the confirmation page', async () => {
       await checkoutPage.finish();
       await expect(page).toHaveURL(/checkout-complete\.html/);
       await expect(checkoutPage.completeHeader).toHaveText(orderCompleteMessage);
       await expect(inventoryPage.cartBadge).toBeHidden();
     });
-
 
     });
  });
