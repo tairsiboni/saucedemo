@@ -24,6 +24,9 @@ export class CheckoutPage {
   readonly taxLabel: Locator;
   readonly totalLabel: Locator;
   readonly finishButton: Locator;
+  readonly menuButton: Locator;
+  readonly logoutLink: Locator;
+  
 
   // Complete
   readonly completeHeader: Locator;
@@ -42,7 +45,8 @@ export class CheckoutPage {
     this.taxLabel = page.getByTestId('tax-label');
     this.totalLabel = page.getByTestId('total-label');
     this.finishButton = page.getByTestId('finish');
-
+    this.menuButton = page.getByRole('button', { name: 'Open Menu' });
+    this.logoutLink = page.getByTestId('logout-sidebar-link');
     this.completeHeader = page.getByTestId('complete-header');
   }
 
@@ -74,4 +78,14 @@ export class CheckoutPage {
   async finish() {
     await this.finishButton.click();
   }
+
+
+  async openMenu() {
+    await this.menuButton.click();
+  }
+
+  async logout() {
+    await this.logoutLink.click();
+  }
+
 }

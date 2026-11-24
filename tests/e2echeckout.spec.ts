@@ -66,6 +66,15 @@ test.describe('End-to-end checkout', () => {
       await expect(inventoryPage.cartBadge).toBeHidden();
     });
 
+   await test.step('log out from the side menu and return to the login page', async () => {
+      await checkoutPage.openMenu();
+      await expect(checkoutPage.logoutLink).toBeInViewport();
+
+      await checkoutPage.logout();
+      await expect(page).toHaveURL('/');
+      await expect(loginPage.loginButton).toBeVisible();
+    });
+    
 
     });
  });
